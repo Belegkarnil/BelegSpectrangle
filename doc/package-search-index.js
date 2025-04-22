@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"be.belegkarnil.game.board.spectrangle"},{"l":"be.belegkarnil.game.board.spectrangle.event"},{"l":"be.belegkarnil.game.board.spectrangle.gui"},{"l":"be.belegkarnil.game.board.spectrangle.strategy"}];updateSearchResults();
