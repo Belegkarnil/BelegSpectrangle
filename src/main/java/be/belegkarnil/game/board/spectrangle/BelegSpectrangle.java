@@ -20,8 +20,7 @@
 package be.belegkarnil.game.board.spectrangle;
 
 import be.belegkarnil.game.board.spectrangle.gui.SpectrangleFrame;
-import be.belegkarnil.game.board.spectrangle.strategy.Strategy;
-import be.belegkarnil.game.board.spectrangle.strategy.StrategyAdapter;
+import be.belegkarnil.game.board.spectrangle.strategy.*;
 
 import java.awt.Window;
 import java.io.File;
@@ -31,11 +30,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.Enumeration;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 /**
  * This class is the main class that run the game with GUI.
@@ -136,8 +131,13 @@ public class BelegSpectrangle {
         return classes;
     }
 
-    public static java.util.List<Class<Strategy>> listStrategies(){
-        return (List<Class<Strategy>>) strategies.clone();
+    public static java.util.List<Class<? extends Strategy>> listStrategies(){
+        List<Class<? extends Strategy>> lst = new ArrayList();
+        lst.add(HMIStrategy.class);
+        lst.add(RandomStrategy.class);
+        lst.add(SkipStrategy.class);
+        return lst;
+        //return (List<Class<Strategy>>) strategies.clone();
     }
 
     public static void loadStrategy(File path) throws MalformedURLException {
