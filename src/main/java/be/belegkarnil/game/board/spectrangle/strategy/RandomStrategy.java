@@ -40,85 +40,86 @@ import java.util.Random;
  * @author Belegkarnil
  */
 public class RandomStrategy extends StrategyAdapter{
-    /**
-     * This constant defines an {@link Action} object which means to skip
-     */
-    private static final Action SKIP_ACTION = new Action();
-    private Random random;
+	/**
+	 * This constant defines an {@link Action} object which means to skip
+	 */
+	private static final Action SKIP_ACTION = new Action();
+	private Random random;
 
-    /**
-     * Initialize the RandomStrategy (i.e. a random generator)
-     */
-    public RandomStrategy() {
-        random = new Random();
-    }
+	/**
+	 * Initialize the RandomStrategy (i.e. a random generator)
+	 */
+	public RandomStrategy(){
+		random = new Random();
+	}
 
-    /**
-     * Override the {@link Strategy#plays(Player, Board, Player)} and try to play randomy a valid action.
-     * @param myself see {@link Strategy#plays}
-     * @param board see {@link Strategy#plays}
-     * @param opponent see {@link Strategy#plays}
-     * @return a valid {@link Action#Action(Piece, Point, int)} (Piece, Position and rotation), if not possible a random Replace {@link Action#Action(Piece)}, otherwise  {@link RandomStrategy#SKIP_ACTION}
-     */
-    @Override
-    public Action plays(Player myself, Board board, Player opponent) {
-        if(!myself.hasPieces()) return SKIP_ACTION;
+	/**
+	 * Override the {@link Strategy#plays(Player, Board, Player)} and try to play randomy a valid action.
+	 *
+	 * @param myself   see {@link Strategy#plays}
+	 * @param board    see {@link Strategy#plays}
+	 * @param opponent see {@link Strategy#plays}
+	 * @return a valid {@link Action#Action(Piece, Point, int)} (Piece, Position and rotation), if not possible a random Replace {@link Action#Action(Piece)}, otherwise  {@link RandomStrategy#SKIP_ACTION}
+	 */
+	@Override
+	public Action plays(Player myself, Board board, Player opponent){
+		if(!myself.hasPieces()) return SKIP_ACTION;
 
-        // List available pieces
-        Piece[] pieces = myself.getPieces();
-        shuffle(pieces);
+		// List available pieces
+		Piece[] pieces = myself.getPieces();
+		shuffle(pieces);
 
-        // List available positions
-        List<Point> points = new ArrayList<>();
-        for(int row=0; row<board.countRows(); row++){
-            for(int column=0; column<board.countColumns(row); column++){
-                final Point currentPosition = new Point(column, row);
-                final List<Point> neighbors = board.getNeighbours(currentPosition);
-                int counter = 0;
-                for(Point neighbor : neighbors){
-                    if(!board.isFree(neighbor)) counter++;
-                }
-                if(board.isFirstMove()) counter++;
-                if(counter>0){
-                    points.add(currentPosition);
-                }
-            }
-        }
-        Collections.shuffle(points,random);
+		// List available positions
+		List<Point> points = new ArrayList<>();
+		for(int row = 0; row < board.countRows(); row++){
+			for(int column = 0; column < board.countColumns(row); column++){
+				final Point currentPosition = new Point(column, row);
+				final List<Point> neighbors = board.getNeighbours(currentPosition);
+				int counter = 0;
+				for(Point neighbor : neighbors){
+					if(!board.isFree(neighbor)) counter++;
+				}
+				if(board.isFirstMove()) counter++;
+				if(counter > 0){
+					points.add(currentPosition);
+				}
+			}
+		}
+		Collections.shuffle(points, random);
 
-        // List available rotation
-        Integer[] rotations = {Integer.valueOf(0),Integer.valueOf(1),Integer.valueOf(2)};
-        shuffle(rotations);
+		// List available rotation
+		Integer[] rotations = {Integer.valueOf(0), Integer.valueOf(1), Integer.valueOf(2)};
+		shuffle(rotations);
 
-        // Then iterate
-        while(!points.isEmpty()){
-            Point position = points.remove(0);
-            for(Piece piece : pieces){
-                for(Integer rotation : rotations){
-                    if(board.canPlace(piece,position,rotation.intValue())){
-                        return new Action(piece,position,rotation.intValue());
-                    }
-                }
-            }
-        }
+		// Then iterate
+		while(!points.isEmpty()){
+			Point position = points.remove(0);
+			for(Piece piece : pieces){
+				for(Integer rotation : rotations){
+					if(board.canPlace(piece, position, rotation.intValue())){
+						return new Action(piece, position, rotation.intValue());
+					}
+				}
+			}
+		}
 
-        // Then no available move, SKIP or REPLACE/SWAP
-        if(board.getBag().isEmpty()) return SKIP_ACTION;
-        return createSwapAction(pieces[0]);
-    }
+		// Then no available move, SKIP or REPLACE/SWAP
+		if(board.getBag().isEmpty()) return SKIP_ACTION;
+		return createSwapAction(pieces[0]);
+	}
 
-    private <T> void shuffle(T[] data) {
-        T temp;
-        int swap;
-        for(int i=0; i<data.length; i++){
-            swap = random.nextInt(data.length);
-            temp = data[i];
-            data[i] = data[swap];
-            data[swap] = temp;
-        }
-    }
+	private <T> void shuffle(T[] data){
+		T temp;
+		int swap;
+		for(int i = 0; i < data.length; i++){
+			swap = random.nextInt(data.length);
+			temp = data[i];
+			data[i] = data[swap];
+			data[swap] = temp;
+		}
+	}
 
-    private Action createSwapAction(Piece pieceToSwap) {
-        return new Action(pieceToSwap);
-    }
+	private Action createSwapAction(Piece pieceToSwap){
+		return new Action(pieceToSwap);
+	}
 }

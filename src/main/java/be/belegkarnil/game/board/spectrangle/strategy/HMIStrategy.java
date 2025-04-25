@@ -32,76 +32,82 @@ import java.awt.Point;
  *
  * @author Belegkarnil
  */
-public class HMIStrategy extends StrategyAdapter {
-    private final Object lock;
-    private Action action;
-    private boolean undefined;
+public class HMIStrategy extends StrategyAdapter{
+	private final Object lock;
+	private Action action;
+	private boolean undefined;
 
-    /**
-     * Constructs a {@link Strategy} that interact with the GUI
-     */
-    public HMIStrategy(){
-        lock			= new Object();
-        undefined	    = true;
-        action		    = null;
-    }
+	/**
+	 * Constructs a {@link Strategy} that interact with the GUI
+	 */
+	public HMIStrategy(){
+		lock = new Object();
+		undefined = true;
+		action = null;
+	}
 
-    /**
-     * Defines the next action as a skip action
-     */
-    public void setSkipAction() {
-        setAction(new Action());
-    }
-    /**
-     * Defines the next action to play
-     * @param piece the piece to play
-     * @param position the position at which put the piece
-     * @param rotation the rotation to apply on the piece
-     */
-    public void setPiece(Piece piece, Point position, int rotation) {
-        setAction(new Action(piece,position,rotation));
-    }
-    /**
-     * Defines the next action to play as a Replace action
-     * @param piece the piece to replace/swap
-     */
-    public void setReplaceAction(Piece piece) {
-        setAction(new Action(piece));
-    }
+	/**
+	 * Defines the next action as a skip action
+	 */
+	public void setSkipAction(){
+		setAction(new Action());
+	}
 
-    /**
-     * Defines the next action to play
-     * @param action the action to play
-     */
-    public void setAction(Action action){
-        synchronized (lock) {
-            this.action = action;
-            undefined	= false;
-        }
-    }
+	/**
+	 * Defines the next action to play
+	 *
+	 * @param piece    the piece to play
+	 * @param position the position at which put the piece
+	 * @param rotation the rotation to apply on the piece
+	 */
+	public void setPiece(Piece piece, Point position, int rotation){
+		setAction(new Action(piece, position, rotation));
+	}
 
-    /**
-     * Override the {@link Strategy#plays(Player, Board, Player)} and return what defined by the GUI interface after calling {@link HMIStrategy#setAction(Action)}
-     * @param myself see {@link Strategy#plays}
-     * @param board see {@link Strategy#plays}
-     * @param opponent see {@link Strategy#plays}
-     * @return The {@link Action} defined by the GUI after calling {@link HMIStrategy#setAction(Action)}
-     */
-    @Override
-    public Action plays(Player myself, Board board, Player opponent){
-        Action playing = null;
-        boolean undefined = true;
-        while(undefined) {
-            synchronized (lock) {
-                undefined = this.undefined;
-                if(!undefined){
-                    playing			= action;
-                    action			= null;
-                    this.undefined	= true;
-                }
-            }
-            if(undefined) Thread.yield();
-        }
-        return playing;
-    }
+	/**
+	 * Defines the next action to play as a Replace action
+	 *
+	 * @param piece the piece to replace/swap
+	 */
+	public void setReplaceAction(Piece piece){
+		setAction(new Action(piece));
+	}
+
+	/**
+	 * Defines the next action to play
+	 *
+	 * @param action the action to play
+	 */
+	public void setAction(Action action){
+		synchronized(lock){
+			this.action = action;
+			undefined = false;
+		}
+	}
+
+	/**
+	 * Override the {@link Strategy#plays(Player, Board, Player)} and return what defined by the GUI interface after calling {@link HMIStrategy#setAction(Action)}
+	 *
+	 * @param myself   see {@link Strategy#plays}
+	 * @param board    see {@link Strategy#plays}
+	 * @param opponent see {@link Strategy#plays}
+	 * @return The {@link Action} defined by the GUI after calling {@link HMIStrategy#setAction(Action)}
+	 */
+	@Override
+	public Action plays(Player myself, Board board, Player opponent){
+		Action playing = null;
+		boolean undefined = true;
+		while(undefined){
+			synchronized(lock){
+				undefined = this.undefined;
+				if(!undefined){
+					playing = action;
+					action = null;
+					this.undefined = true;
+				}
+			}
+			if(undefined) Thread.yield();
+		}
+		return playing;
+	}
 }

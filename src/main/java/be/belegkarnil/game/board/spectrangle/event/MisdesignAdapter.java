@@ -26,28 +26,39 @@ package be.belegkarnil.game.board.spectrangle.event;
  * @author Belegkarnil
  */
 public class MisdesignAdapter implements MisdesignListener{
-    /**
-     * See {@link MisdesignListener#onInvalidPiece}
-     * @param event
-     */
-    @Override
-    public void onInvalidPiece(MisdesignEvent event){}
-    /**
-     * See {@link MisdesignListener#onInvalidPosition}
-     * @param event
-     */
-    @Override
-    public void onInvalidPosition(MisdesignEvent event){}
-    /**
-     * See {@link MisdesignListener#onTimeout}
-     * @param event
-     */
-    @Override
-    public void onTimeout(MisdesignEvent event){}
-    /**
-     * See {@link MisdesignListener#onException}
-     * @param event
-     */
-    @Override
-    public void onException(MisdesignEvent event){}
+	/**
+	 * See {@link MisdesignListener#onInvalidPiece}
+	 *
+	 * @param event
+	 */
+	@Override
+	public void onInvalidPiece(MisdesignEvent event){
+	}
+
+	/**
+	 * See {@link MisdesignListener#onInvalidPosition}
+	 *
+	 * @param event
+	 */
+	@Override
+	public void onInvalidPosition(MisdesignEvent event){
+	}
+
+	/**
+	 * See {@link MisdesignListener#onTimeout}
+	 *
+	 * @param event
+	 */
+	@Override
+	public void onTimeout(MisdesignEvent event){
+	}
+
+	/**
+	 * See {@link MisdesignListener#onException}
+	 *
+	 * @param event
+	 */
+	@Override
+	public void onException(MisdesignEvent event){
+	}
 }

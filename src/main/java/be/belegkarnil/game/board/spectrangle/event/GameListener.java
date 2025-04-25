@@ -26,22 +26,25 @@ import java.util.EventListener;
 /**
  * The listener interface for receiving "interesting" game events (begin, and end) during a game.
  * The class that is interested in processing a game event either implements this interface (and all the methods it contains) or extends the abstract {@link GameAdapter} class (overriding only the methods of interest).
- *
+ * <p>
  * The listener object created from that class is then registered in a {@link be.belegkarnil.game.board.spectrangle.strategy.Strategy}'s {@link be.belegkarnil.game.board.spectrangle.strategy.Strategy#register(Game)} on the {@link Game} object using {@link Game#addGameListener(GameListener)}.
  * Please, do not forget to unregister the listener when the {@link be.belegkarnil.game.board.spectrangle.strategy.Strategy}'s {@link be.belegkarnil.game.board.spectrangle.strategy.Strategy#unregister(Game)} method is called by using {@link Game#removeGameListener(GameListener)} on the {@link Game} object.
  * A game event is generated when a game starts or ends. When a game event occurs, the relevant method in the listener object is invoked, and the {@link GameEvent} is passed to it.
  *
  * @author Belegkarnil
  */
-public interface GameListener extends EventListener {
-    /**
-     * Invoked when a game begins.
-     * @param event The event that contains all information about the current game
-     */
-    public void onGameBegins(GameEvent event);
-    /**
-     * Invoked when a game ends.
-     * @param event The event that contains all information about the current game
-     */
-    public void onGameEnds(GameEvent event);
+public interface GameListener extends EventListener{
+	/**
+	 * Invoked when a game begins.
+	 *
+	 * @param event The event that contains all information about the current game
+	 */
+	public void onGameBegins(GameEvent event);
+
+	/**
+	 * Invoked when a game ends.
+	 *
+	 * @param event The event that contains all information about the current game
+	 */
+	public void onGameEnds(GameEvent event);
 }

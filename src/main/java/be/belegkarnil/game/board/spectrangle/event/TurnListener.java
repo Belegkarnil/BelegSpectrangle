@@ -26,22 +26,25 @@ import java.util.EventListener;
 /**
  * The listener interface for receiving "interesting" turn events (begin, and end) during a game.
  * The class that is interested in processing a turn event either implements this interface (and all the methods it contains) or extends the abstract {@link TurnAdapter} class (overriding only the methods of interest).
- *
+ * <p>
  * The listener object created from that class is then registered in a {@link be.belegkarnil.game.board.spectrangle.strategy.Strategy}'s {@link be.belegkarnil.game.board.spectrangle.strategy.Strategy#register(Game)} on the {@link Game} object using {@link Game#addTurnListener(TurnListener)}.
  * Please, do not forget to unregister the listener when the {@link be.belegkarnil.game.board.spectrangle.strategy.Strategy}'s {@link be.belegkarnil.game.board.spectrangle.strategy.Strategy#unregister(Game)} method is called by using {@link Game#removeTurnListener(TurnListener)} on the {@link Game} object.
  * A turn event is generated when a player has to play, and has played. When a turn event occurs, the relevant method in the listener object is invoked, and the {@link TurnEvent} is passed to it.
  *
  * @author Belegkarnil
  */
-public interface TurnListener extends EventListener {
-    /**
-     * Invoked when a turn begins.
-     * @param event The event that contains all information about the current turn
-     */
-    public void onTurnBegins(TurnEvent event);
-    /**
-     * Invoked when a turn ends.
-     * @param event The event that contains all information about the current turn
-     */
-    public void onTurnEnds(TurnEvent event);
+public interface TurnListener extends EventListener{
+	/**
+	 * Invoked when a turn begins.
+	 *
+	 * @param event The event that contains all information about the current turn
+	 */
+	public void onTurnBegins(TurnEvent event);
+
+	/**
+	 * Invoked when a turn ends.
+	 *
+	 * @param event The event that contains all information about the current turn
+	 */
+	public void onTurnEnds(TurnEvent event);
 }

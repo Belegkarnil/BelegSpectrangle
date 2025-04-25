@@ -26,27 +26,33 @@ import be.belegkarnil.game.board.spectrangle.strategy.HMIStrategy;
 import javax.swing.JPanel;
 import java.util.LinkedList;
 import java.util.List;
+
 /**
  * This class is a GUI component of the Game. It is an abstract panel ({@link JPanel}) which is able to listen
  * a {@link Game} and be notified when a human player interact to select a {@link Piece} within the {@link HMIStrategy},
  *
  * @author Belegkarnil
  */
-public abstract class SpectranglePanel extends JPanel {
-    private static final List<SpectranglePanel> panels = new LinkedList<SpectranglePanel>();
-    public SpectranglePanel(){
-        super();
-        panels.add(this);
-    }
-    static void initGame(Game game){
-        for(SpectranglePanel panel:panels)
-            panel.register(game);
-    }
-    static void firePieceSelected(String name){
-        for(SpectranglePanel panel:panels)
-            panel.onPieceSelected(name);
-    }
-    abstract void register(Game game);
-    abstract void onPieceSelected(String name);
+public abstract class SpectranglePanel extends JPanel{
+	private static final List<SpectranglePanel> panels = new LinkedList<SpectranglePanel>();
+
+	public SpectranglePanel(){
+		super();
+		panels.add(this);
+	}
+
+	static void initGame(Game game){
+		for(SpectranglePanel panel : panels)
+			panel.register(game);
+	}
+
+	static void firePieceSelected(String name){
+		for(SpectranglePanel panel : panels)
+			panel.onPieceSelected(name);
+	}
+
+	abstract void register(Game game);
+
+	abstract void onPieceSelected(String name);
 
 }

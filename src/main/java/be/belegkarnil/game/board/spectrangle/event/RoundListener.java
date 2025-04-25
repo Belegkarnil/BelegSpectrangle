@@ -26,22 +26,25 @@ import java.util.EventListener;
 /**
  * The listener interface for receiving "interesting" round events (begin, and end) during a game.
  * The class that is interested in processing a round event either implements this interface (and all the methods it contains) or extends the abstract {@link RoundAdapter} class (overriding only the methods of interest).
- *
+ * <p>
  * The listener object created from that class is then registered in a {@link be.belegkarnil.game.board.spectrangle.strategy.Strategy}'s {@link be.belegkarnil.game.board.spectrangle.strategy.Strategy#register(Game)} on the {@link Game} object using {@link Game#addRoundListener(RoundListener)}.
  * Please, do not forget to unregister the listener when the {@link be.belegkarnil.game.board.spectrangle.strategy.Strategy}'s {@link be.belegkarnil.game.board.spectrangle.strategy.Strategy#unregister(Game)} method is called by using {@link Game#removeRoundListener(RoundListener)} on the {@link Game} object.
  * A round event is generated when a player a new round starts or ends. When a round event occurs, the relevant method in the listener object is invoked, and the {@link RoundEvent} is passed to it.
  *
  * @author Belegkarnil
  */
-public interface RoundListener extends EventListener {
-    /**
-     * Invoked when a round begins.
-     * @param event The event that contains all information about the current round
-     */
-    public void onRoundBegins(RoundEvent event);
-    /**
-     * Invoked when a round ends.
-     * @param event The event that contains all information about the current round
-     */
-    public void onRoundEnds(RoundEvent event);
+public interface RoundListener extends EventListener{
+	/**
+	 * Invoked when a round begins.
+	 *
+	 * @param event The event that contains all information about the current round
+	 */
+	public void onRoundBegins(RoundEvent event);
+
+	/**
+	 * Invoked when a round ends.
+	 *
+	 * @param event The event that contains all information about the current round
+	 */
+	public void onRoundEnds(RoundEvent event);
 }

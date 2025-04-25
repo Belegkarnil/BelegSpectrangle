@@ -30,99 +30,107 @@ import java.util.Collections;
  *
  * @author Belegkarnil
  */
-public class Bag implements Cloneable {
-    private final Random random;
-    private List<Piece> content;
+public class Bag implements Cloneable{
+	private final Random random;
+	private List<Piece> content;
 
-    /**
-     * Construct a bag with random undefined seed
-     */
-    public Bag(){
-        this(new Random((new Random()).nextLong()));
-    }
+	/**
+	 * Construct a bag with random undefined seed
+	 */
+	public Bag(){
+		this(new Random((new Random()).nextLong()));
+	}
 
-    /**
-     * Constructor that clones the bag (see {@link Bag#clone()})
-     * @param bag The bag to clone
-     */
-    protected Bag(Bag bag){
-        this(new Random((new Random()).nextLong()));
-        for(Piece piece : bag.content){
-            this.content.add(piece);
-        }
-    }
-    /**
-     * Construct a bag with custom {@link Random} generator
-     */
-    public Bag(Random random) {
-        this.random = random;
-        this.content    = new LinkedList<Piece>();
-    }
+	/**
+	 * Constructor that clones the bag (see {@link Bag#clone()})
+	 *
+	 * @param bag The bag to clone
+	 */
+	protected Bag(Bag bag){
+		this(new Random((new Random()).nextLong()));
+		for(Piece piece : bag.content){
+			this.content.add(piece);
+		}
+	}
 
-    /**
-     * Swap a given {@link Piece} by another from the bag
-     * @param piece The Piece to swap
-     * @return A new {@link Piece} taken from the bag
-     */
-    protected Piece swap(Piece piece){
-        if(piece == null) throw new NullPointerException("Piece cannot be null");
-        final Piece taken = take();
-        this.content.add(random.nextInt(size()+1),piece);
-        return taken;
-    }
+	/**
+	 * Construct a bag with custom {@link Random} generator
+	 */
+	public Bag(Random random){
+		this.random = random;
+		this.content = new LinkedList<Piece>();
+	}
 
-    /**
-     * Take an amount of Piece from the bag (see {@link Bag#take()}
-     * @param amount The amount of {@link Piece} to take
-     * @return An array of {@link Piece}s taken from the bag
-     */
-    protected Piece[] take(int amount){
-        Piece[] pieces = new Piece[amount];
-        for(int i=0; i<amount; i++){
-            pieces[i] = take();
-        }
-        return pieces;
-    }
+	/**
+	 * Swap a given {@link Piece} by another from the bag
+	 *
+	 * @param piece The Piece to swap
+	 * @return A new {@link Piece} taken from the bag
+	 */
+	protected Piece swap(Piece piece){
+		if(piece == null) throw new NullPointerException("Piece cannot be null");
+		final Piece taken = take();
+		this.content.add(random.nextInt(size() + 1), piece);
+		return taken;
+	}
 
-    /**
-     * Reset the bag for another round/game. All Piece are put into the bag.
-     */
-    protected void reset(){
-        this.content = new ArrayList<Piece>(List.of(Piece.values()));
-        Collections.shuffle(content,this.random);
-    }
+	/**
+	 * Take an amount of Piece from the bag (see {@link Bag#take()}
+	 *
+	 * @param amount The amount of {@link Piece} to take
+	 * @return An array of {@link Piece}s taken from the bag
+	 */
+	protected Piece[] take(int amount){
+		Piece[] pieces = new Piece[amount];
+		for(int i = 0; i < amount; i++){
+			pieces[i] = take();
+		}
+		return pieces;
+	}
 
-    /**
-     * Take one {@link Piece} from the bag
-     * @return A {@link Piece} extracted from the bag
-     */
-    protected Piece take(){
-        return content.remove(0);
-    }
+	/**
+	 * Reset the bag for another round/game. All Piece are put into the bag.
+	 */
+	protected void reset(){
+		this.content = new ArrayList<Piece>(List.of(Piece.values()));
+		Collections.shuffle(content, this.random);
+	}
 
-    /**
-     * Get the number of {@link Piece}s the bag has.
-     * @return The number of {@link Piece}s that are in the bag
-     */
-    public int size(){
-        return content.size();
-    }
+	/**
+	 * Take one {@link Piece} from the bag
+	 *
+	 * @return A {@link Piece} extracted from the bag
+	 */
+	protected Piece take(){
+		return content.remove(0);
+	}
 
-    /**
-     * Know if the bag is empty
-     * @return true iff the bag contains no {@link Piece}
-     */
-    public boolean isEmpty(){
-        return content.isEmpty();
-    }
+	/**
+	 * Get the number of {@link Piece}s the bag has.
+	 *
+	 * @return The number of {@link Piece}s that are in the bag
+	 */
+	public int size(){
+		return content.size();
+	}
 
-    /**
-     * Clone the current bag (note that the random number is different)
-     * @return a clone of the bag state
-     * @throws CloneNotSupportedException
-     */
-    @Override
-    public Object clone() throws CloneNotSupportedException {
-        return new Bag(this);
-    }
+	/**
+	 * Know if the bag is empty
+	 *
+	 * @return true iff the bag contains no {@link Piece}
+	 */
+	public boolean isEmpty(){
+		return content.isEmpty();
+	}
+
+	/**
+	 * Clone the current bag (note that the random number is different)
+	 *
+	 * @return a clone of the bag state
+	 * @throws CloneNotSupportedException
+	 */
+	@Override
+	public Object clone() throws CloneNotSupportedException{
+		return new Bag(this);
+	}
 }

@@ -29,20 +29,21 @@ import be.belegkarnil.game.board.spectrangle.Player;
  * @author Belegkarnil
  */
 public class SkipStrategy extends StrategyAdapter{
-    /**
-     * This constant defines an {@link Action} object which means to skip
-     */
-    public static final Action SKIP_ACTION = new Action();
+	/**
+	 * This constant defines an {@link Action} object which means to skip
+	 */
+	public static final Action SKIP_ACTION = new Action();
 
-    /**
-     * Override the {@link Strategy#plays(Player, Board, Player)} and always return {@link SkipStrategy#SKIP_ACTION}
-     * @param myself see {@link Strategy#plays}
-     * @param board see {@link Strategy#plays}
-     * @param opponent see {@link Strategy#plays}
-     * @return {@link SkipStrategy#SKIP_ACTION}
-     */
-    @Override
-    public Action plays(Player myself, Board board, Player opponent) {
-        return SKIP_ACTION;
-    }
+	/**
+	 * Override the {@link Strategy#plays(Player, Board, Player)} and always return {@link SkipStrategy#SKIP_ACTION}
+	 *
+	 * @param myself   see {@link Strategy#plays}
+	 * @param board    see {@link Strategy#plays}
+	 * @param opponent see {@link Strategy#plays}
+	 * @return {@link SkipStrategy#SKIP_ACTION}
+	 */
+	@Override
+	public Action plays(Player myself, Board board, Player opponent){
+		return SKIP_ACTION;
+	}
 }

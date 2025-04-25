@@ -29,31 +29,32 @@ import be.belegkarnil.game.board.spectrangle.strategy.Strategy;
  * @author Belegkarnil
  */
 class StrategyTask extends Thread{
-    private final Player current,opponent;
-    private final Board board;
-    private Action action;
+	private final Player current, opponent;
+	private final Board board;
+	private Action action;
 
-    private final Object lock = new Object();
+	private final Object lock = new Object();
 
-    public StrategyTask(Player current, Board board, Player opponent){
-        this.current	= current;
-        this.opponent	= opponent;
-        this.board		= board;
-        this.action		= null;
-    }
+	public StrategyTask(Player current, Board board, Player opponent){
+		this.current = current;
+		this.opponent = opponent;
+		this.board = board;
+		this.action = null;
+	}
 
-    @Override
-    public void run(){
-        final Action action = current.behaves(board,opponent);
-        synchronized (lock) {
-            this.action = action;
-        }
-    }
-    public Action getAction(){
-        final Action action;
-        synchronized (lock) {
-            action = this.action;
-        }
-        return action;
-    }
+	@Override
+	public void run(){
+		final Action action = current.behaves(board, opponent);
+		synchronized(lock){
+			this.action = action;
+		}
+	}
+
+	public Action getAction(){
+		final Action action;
+		synchronized(lock){
+			action = this.action;
+		}
+		return action;
+	}
 }

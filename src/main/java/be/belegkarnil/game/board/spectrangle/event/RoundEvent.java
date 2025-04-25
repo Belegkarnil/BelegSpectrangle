@@ -29,55 +29,57 @@ import java.util.EventObject;
  *
  * @author Belegkarnil
  */
-public class RoundEvent  extends EventObject {
-    /**
-     * is the first {link @Player} when the round will start
-     */
-    public final Player startPlayer;
-    /**
-     * is the second/other/opponent {link @Player} when the round will start
-     */
-    public final Player opponent;
-    /**
-     * is the {link @Player} who win the current round during the {@link Game} or {@link GameEvent#NO_WINNER}
-     */
-    public final Player winner;
-    /**
-     * is the identifier (counter) of the related round.
-     */
-    public final int round;
-    /**
-     * is the {link @Game} related to this event (i.e. the {@link Game} that generates the event)
-     */
-    public final Game game;
-    /**
-     * Constructor that does not define a winner ({@link GameEvent#NO_WINNER}), designed for begin events.
-     *
-     * @param game the game related to the event, it's the source of the event
-     * @param startPlayer is the first player to play when the round will start
-     * @param opponent is the second/other/opponent player to play when the round will start
-     * @param round is the round identifier related to the event
-     * @throws IllegalArgumentException if source is null
-     */
-    public RoundEvent(final Game game, final Player startPlayer, final Player opponent, final int round) {
-        this(game,startPlayer,opponent,round,GameEvent.NO_WINNER);
-    }
-    /**
-     * Constructor requires a winner ({@link GameEvent#NO_WINNER}), designed for end events.
-     *
-     * @param game the game related to the event, it's the source of the event
-     * @param startPlayer is the first player to play when the round will start
-     * @param opponent is the second/other/opponent player to play when the round will start
-     * @param round is the round identifier related to the event
-     * @param winner is the player (first/second) who win the {@link Game} or {@link GameEvent#NO_WINNER}
-     * @throws IllegalArgumentException if source is null
-     */
-    public RoundEvent(final Game game,final Player startPlayer, final Player opponent, final int round, final Player winner) {
-        super(game);
-        this.startPlayer    = startPlayer;
-        this.opponent       = opponent;
-        this.round          = round;
-        this.winner         = winner;
-        this.game           = game;
-    }
+public class RoundEvent extends EventObject{
+	/**
+	 * is the first {link @Player} when the round will start
+	 */
+	public final Player startPlayer;
+	/**
+	 * is the second/other/opponent {link @Player} when the round will start
+	 */
+	public final Player opponent;
+	/**
+	 * is the {link @Player} who win the current round during the {@link Game} or {@link GameEvent#NO_WINNER}
+	 */
+	public final Player winner;
+	/**
+	 * is the identifier (counter) of the related round.
+	 */
+	public final int round;
+	/**
+	 * is the {link @Game} related to this event (i.e. the {@link Game} that generates the event)
+	 */
+	public final Game game;
+
+	/**
+	 * Constructor that does not define a winner ({@link GameEvent#NO_WINNER}), designed for begin events.
+	 *
+	 * @param game        the game related to the event, it's the source of the event
+	 * @param startPlayer is the first player to play when the round will start
+	 * @param opponent    is the second/other/opponent player to play when the round will start
+	 * @param round       is the round identifier related to the event
+	 * @throws IllegalArgumentException if source is null
+	 */
+	public RoundEvent(final Game game, final Player startPlayer, final Player opponent, final int round){
+		this(game, startPlayer, opponent, round, GameEvent.NO_WINNER);
+	}
+
+	/**
+	 * Constructor requires a winner ({@link GameEvent#NO_WINNER}), designed for end events.
+	 *
+	 * @param game        the game related to the event, it's the source of the event
+	 * @param startPlayer is the first player to play when the round will start
+	 * @param opponent    is the second/other/opponent player to play when the round will start
+	 * @param round       is the round identifier related to the event
+	 * @param winner      is the player (first/second) who win the {@link Game} or {@link GameEvent#NO_WINNER}
+	 * @throws IllegalArgumentException if source is null
+	 */
+	public RoundEvent(final Game game, final Player startPlayer, final Player opponent, final int round, final Player winner){
+		super(game);
+		this.startPlayer = startPlayer;
+		this.opponent = opponent;
+		this.round = round;
+		this.winner = winner;
+		this.game = game;
+	}
 }

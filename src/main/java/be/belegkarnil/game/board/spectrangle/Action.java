@@ -23,75 +23,81 @@ import java.awt.Point;
 
 /**
  * This class represents all possible actions during a {@link Game}.
+ *
  * @author Belegkarnil
  */
-public class Action {
-    /**
-     * The piece played during the action
-     */
-    public final Piece piece;
-    /**
-     * The replace/swap request during the action
-     */
-    public final boolean replace;
-    /**
-     * The rotation applied to the piece played during the action
-     */
-    public final int rotation;
-    /**
-     * The position at which to put the piece during the action
-     */
-    public final Point position;
+public class Action{
+	/**
+	 * The piece played during the action
+	 */
+	public final Piece piece;
+	/**
+	 * The replace/swap request during the action
+	 */
+	public final boolean replace;
+	/**
+	 * The rotation applied to the piece played during the action
+	 */
+	public final int rotation;
+	/**
+	 * The position at which to put the piece during the action
+	 */
+	public final Point position;
 
-    /**
-     * The maximum number of rotation that can be applied to a {@link Piece}
-     */
-    public static final int MAX_ROTATION = 3;
+	/**
+	 * The maximum number of rotation that can be applied to a {@link Piece}
+	 */
+	public static final int MAX_ROTATION = 3;
 
-    private Action(Piece piece, boolean replace, Point position,int rotation) {
-        this.piece      = piece;
-        this.replace    = replace;
-        this.position   = position;
-        this.rotation   = (MAX_ROTATION + (rotation % MAX_ROTATION)) % MAX_ROTATION;
-    }
+	private Action(Piece piece, boolean replace, Point position, int rotation){
+		this.piece = piece;
+		this.replace = replace;
+		this.position = position;
+		this.rotation = (MAX_ROTATION + (rotation % MAX_ROTATION)) % MAX_ROTATION;
+	}
 
-    /**
-     * Construct an action to replace/swap action (i.e. put a piece in the bag and ask another)
-     * @param piece the piece to put back in the bag
-     */
-    public Action(Piece piece) {
-        this(piece, true, null,0);
-    }
-    /**
-     * Construct an action to skip turn, no action
-     */
-    public Action() {
-        this(null, false, null,0);
-    }
+	/**
+	 * Construct an action to replace/swap action (i.e. put a piece in the bag and ask another)
+	 *
+	 * @param piece the piece to put back in the bag
+	 */
+	public Action(Piece piece){
+		this(piece, true, null, 0);
+	}
 
-    /**
-     * Construct an action to play a piece on the board
-     * @param piece the piece to put on the board at pos position
-     * @param position the position to put the piece on
-     * @param rotation the number of clockwise rotation to apply on the piece
-     */
-    public Action(Piece piece, Point position,int rotation) {
-        this(piece, false, position,rotation);
-    }
+	/**
+	 * Construct an action to skip turn, no action
+	 */
+	public Action(){
+		this(null, false, null, 0);
+	}
 
-    /**
-     * Know if the action is to replace/swap a {@link Piece}
-     * @return true iff the action is to replace/swap a {@link Piece}
-     */
-    public boolean isReplace() {
-        return replace;
-    }
+	/**
+	 * Construct an action to play a piece on the board
+	 *
+	 * @param piece    the piece to put on the board at pos position
+	 * @param position the position to put the piece on
+	 * @param rotation the number of clockwise rotation to apply on the piece
+	 */
+	public Action(Piece piece, Point position, int rotation){
+		this(piece, false, position, rotation);
+	}
 
-    /**
-     * Know if the action is to skip the turn
-     * @return true iff the action is to skip the turn
-     */
-    public boolean isSkip(){
-        return !replace && this.piece == null;
-    }
+	/**
+	 * Know if the action is to replace/swap a {@link Piece}
+	 *
+	 * @return true iff the action is to replace/swap a {@link Piece}
+	 */
+	public boolean isReplace(){
+		return replace;
+	}
+
+	/**
+	 * Know if the action is to skip the turn
+	 *
+	 * @return true iff the action is to skip the turn
+	 */
+	public boolean isSkip(){
+		return !replace && this.piece == null;
+	}
 }

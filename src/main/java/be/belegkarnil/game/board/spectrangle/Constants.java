@@ -23,16 +23,17 @@ import java.awt.Color;
 
 /**
  * This class contains global colors information of the original Spectrangle game
+ *
  * @author Belegkarnil
  */
 public final class Constants{
-    public static final Color PURPLE_COLOR  = new Color(102,0,153);
-    public static final Color RED_COLOR     = new Color(139,15,25);
-    public static final Color GREEN_COLOR   = new Color(0x05,0x60,0x27);
-    public static final Color BLUE_COLOR    = new Color(63,144,199);
-    public static final Color YELLOW_COLOR  = new Color(210,182,39);
-    public static final Color WHITE_COLOR   = new Color(173,161,147);
+	public static final Color PURPLE_COLOR = new Color(102, 0, 153);
+	public static final Color RED_COLOR = new Color(139, 15, 25);
+	public static final Color GREEN_COLOR = new Color(0x05, 0x60, 0x27);
+	public static final Color BLUE_COLOR = new Color(63, 144, 199);
+	public static final Color YELLOW_COLOR = new Color(210, 182, 39);
+	public static final Color WHITE_COLOR = new Color(173, 161, 147);
 
-    public static final Color FIST_PLAYER_COLOR     = PURPLE_COLOR.brighter();
-    public static final Color SECOND_PLAYER_COLOR   = YELLOW_COLOR.brighter();
+	public static final Color FIST_PLAYER_COLOR = PURPLE_COLOR.brighter();
+	public static final Color SECOND_PLAYER_COLOR = YELLOW_COLOR.brighter();
 };

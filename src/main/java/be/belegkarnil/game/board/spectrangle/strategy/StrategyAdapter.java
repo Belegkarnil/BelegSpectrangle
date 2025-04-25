@@ -28,18 +28,22 @@ import be.belegkarnil.game.board.spectrangle.Game;
  *
  * @author Belegkarnil
  */
-public abstract class StrategyAdapter implements Strategy {
-    /**
-     * See {@link Strategy#register}
-     * @param game See {@link Strategy#register}
-     */
-    @Override
-    public void register(Game game) {}
+public abstract class StrategyAdapter implements Strategy{
+	/**
+	 * See {@link Strategy#register}
+	 *
+	 * @param game See {@link Strategy#register}
+	 */
+	@Override
+	public void register(Game game){
+	}
 
-    /**
-     * See {@link Strategy#unregister}
-     * @param game See {@link Strategy#unregister}
-     */
-    @Override
-    public void unregister(Game game) {}
+	/**
+	 * See {@link Strategy#unregister}
+	 *
+	 * @param game See {@link Strategy#unregister}
+	 */
+	@Override
+	public void unregister(Game game){
+	}
 }

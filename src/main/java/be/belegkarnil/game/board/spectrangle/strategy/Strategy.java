@@ -34,28 +34,31 @@ import be.belegkarnil.game.board.spectrangle.event.TurnListener;
  *
  * @author Belegkarnil
  */
-public interface Strategy {
+public interface Strategy{
 
-    /**
-     * The method represents the choice made by the strategy based on the current player the use the strategy, the current board status and his opponent
-     * @param myself The current player that plays the strategy
-     * @param board The current board status
-     * @param opponent The opponent player
-     * @return The action to play by myself #{@link Player}
-     */
-    public Action plays(Player myself, Board board, Player opponent);
+	/**
+	 * The method represents the choice made by the strategy based on the current player the use the strategy, the current board status and his opponent
+	 *
+	 * @param myself   The current player that plays the strategy
+	 * @param board    The current board status
+	 * @param opponent The opponent player
+	 * @return The action to play by myself #{@link Player}
+	 */
+	public Action plays(Player myself, Board board, Player opponent);
 
-    /**
-     * This method is called before a game starts in order to allow the strategy to listen events.
-     * (see {@link Game#addGameListener(GameListener)}, {@link Game#addMisdesignListener(MisdesignListener)}, {@link Game#addRoundListener(RoundListener)}, and {@link Game#addTurnListener(TurnListener)})
-     * @param game the new game to listen events
-     */
-    public void register(Game game);
+	/**
+	 * This method is called before a game starts in order to allow the strategy to listen events.
+	 * (see {@link Game#addGameListener(GameListener)}, {@link Game#addMisdesignListener(MisdesignListener)}, {@link Game#addRoundListener(RoundListener)}, and {@link Game#addTurnListener(TurnListener)})
+	 *
+	 * @param game the new game to listen events
+	 */
+	public void register(Game game);
 
-    /**
-     * This method is called after a game finishes in order to clear and the strategy stops to listen events.
-     * (see {@link Game#removeGameListener(GameListener)}, {@link Game#removeMisdesignListener(MisdesignListener)}, {@link Game#removeRoundListener(RoundListener)}, and {@link Game#removeTurnListener(TurnListener)})
-     * @param game the finished game to stop listening events
-     */
-    public void unregister(Game game);
+	/**
+	 * This method is called after a game finishes in order to clear and the strategy stops to listen events.
+	 * (see {@link Game#removeGameListener(GameListener)}, {@link Game#removeMisdesignListener(MisdesignListener)}, {@link Game#removeRoundListener(RoundListener)}, and {@link Game#removeTurnListener(TurnListener)})
+	 *
+	 * @param game the finished game to stop listening events
+	 */
+	public void unregister(Game game);
 }

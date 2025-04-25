@@ -40,107 +40,109 @@ import java.awt.event.ActionListener;
  *
  * @author Belegkarnil
  */
-public class LogPanel extends SpectranglePanel implements ActionListener, GameListener, RoundListener, TurnListener {
-    private final JTextArea content;
-    public LogPanel(){
-        setLayout(new BorderLayout());
-        content = new JTextArea();
-        content.setEditable(false);
-        add(new JScrollPane(content),BorderLayout.CENTER);
-        add(createMenu(),BorderLayout.SOUTH);
-        content.setEditable(false);
-        final Dimension dimension = new Dimension(200,0);
-        setMinimumSize(dimension);
-        setPreferredSize(dimension);
-    }
+public class LogPanel extends SpectranglePanel implements ActionListener, GameListener, RoundListener, TurnListener{
+	private final JTextArea content;
 
-    @Override
-    void register(Game game) {
-        game.addGameListener(this);
-        game.addRoundListener(this);
-        game.addTurnListener(this);
-    }
+	public LogPanel(){
+		setLayout(new BorderLayout());
+		content = new JTextArea();
+		content.setEditable(false);
+		add(new JScrollPane(content), BorderLayout.CENTER);
+		add(createMenu(), BorderLayout.SOUTH);
+		content.setEditable(false);
+		final Dimension dimension = new Dimension(200, 0);
+		setMinimumSize(dimension);
+		setPreferredSize(dimension);
+	}
 
-    @Override
-    void onPieceSelected(String name) {
+	@Override
+	void register(Game game){
+		if(game == null) return;
+		game.addGameListener(this);
+		game.addRoundListener(this);
+		game.addTurnListener(this);
+	}
 
-    }
+	@Override
+	void onPieceSelected(String name){
 
-    private JPanel createMenu() {
-        final JPanel panel = new JPanel(new FlowLayout());
-        final JButton export = new JButton("Export");
-        export.addActionListener(this);
-        panel.add(export);
-        return panel;
-    }
+	}
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        System.out.println("TODO actionPerformed@"+getClass().getSimpleName());
-    }
+	private JPanel createMenu(){
+		final JPanel panel = new JPanel(new FlowLayout());
+		final JButton export = new JButton("Export");
+		export.addActionListener(this);
+		panel.add(export);
+		return panel;
+	}
 
-    @Override
-    public void onGameBegins(GameEvent ge) {
-        content.setText("");
-        content.append("Player1="+ge.game.getFirstPlayer().getName()+"\n");
-        content.append("Player2="+ge.game.getSecondPlayer().getName()+"\n");
-        content.append("Timeout="+ge.game.getTimeout()+"\n");
-        content.append("Skip limit="+ge.game.getSkipLimit()+"\n");
-        content.append("Winning rounds="+ge.game.getWinningRounds()+"\n");
-    }
+	@Override
+	public void actionPerformed(ActionEvent e){
+		System.out.println("TODO actionPerformed@" + getClass().getSimpleName());
+	}
 
-    @Override
-    public void onGameEnds(GameEvent ge) {
-        if(ge.winner != null){
-            content.append("\nWinner is "+ge.winner.getName()+"\n");
-        }else{
-            content.append("\nNo winner\n");
-        }
-    }
+	@Override
+	public void onGameBegins(GameEvent ge){
+		content.setText("");
+		content.append("Player1=" + ge.game.getFirstPlayer().getName() + "\n");
+		content.append("Player2=" + ge.game.getSecondPlayer().getName() + "\n");
+		content.append("Timeout=" + ge.game.getTimeout() + "\n");
+		content.append("Skip limit=" + ge.game.getSkipLimit() + "\n");
+		content.append("Winning rounds=" + ge.game.getWinningRounds() + "\n");
+	}
 
-    @Override
-    public void onRoundBegins(RoundEvent re) {
-        content.append("\nRound "+re.round+"\n");
-        content.append("Player1="+re.startPlayer.getName()+"\n");
-        content.append("Player2="+re.opponent.getName()+"\n");
-    }
+	@Override
+	public void onGameEnds(GameEvent ge){
+		if(ge.winner != null){
+			content.append("\nWinner is " + ge.winner.getName() + "\n");
+		}else{
+			content.append("\nNo winner\n");
+		}
+	}
 
-    @Override
-    public void onRoundEnds(RoundEvent re) {
-        if(re.winner != null){
-            content.append("\nWinner is "+re.winner.getName()+"\n");
-            content.append("Player1 score is "+re.startPlayer.getScore()+"\n");
-            content.append("Player2 score is "+re.opponent.getScore()+"\n");
-        }else{
-            content.append("\nNo winner\n");
-        }
-    }
+	@Override
+	public void onRoundBegins(RoundEvent re){
+		content.append("\nRound " + re.round + "\n");
+		content.append("Player1=" + re.startPlayer.getName() + "\n");
+		content.append("Player2=" + re.opponent.getName() + "\n");
+	}
 
-    @Override
-    public void onTurnBegins(TurnEvent te) {
-        content.append("Turn "+te.turn+"\n");
-    }
+	@Override
+	public void onRoundEnds(RoundEvent re){
+		if(re.winner != null){
+			content.append("\nWinner is " + re.winner.getName() + "\n");
+			content.append("Player1 score is " + re.startPlayer.getScore() + "\n");
+			content.append("Player2 score is " + re.opponent.getScore() + "\n");
+		}else{
+			content.append("\nNo winner\n");
+		}
+	}
 
-    @Override
-    public void onTurnEnds(TurnEvent te) {
-        if(te.action != null){
-            final Action action	    = te.action;
-            final Piece piece	    = action.piece;
-            final Point position    = action.position;
-            final int rotation      = action.rotation;
-            final boolean replace   = action.replace;
+	@Override
+	public void onTurnBegins(TurnEvent te){
+		content.append("Turn " + te.turn + "\n");
+	}
 
-            if(replace){
-                content.append("Action=Replace,"+piece.name()+"\n");
-            }else if(piece == null){
-                content.append("Action=Skip\n");
-            }else{
-                content.append("Action=Play,"+piece.name()+", x="+position.getX()+", y="+position.getY()+", rotation="+rotation+"\n");
-            }
-        }else{
-            content.append("Action=none\n");
-        }
-    }
+	@Override
+	public void onTurnEnds(TurnEvent te){
+		if(te.action != null){
+			final Action action = te.action;
+			final Piece piece = action.piece;
+			final Point position = action.position;
+			final int rotation = action.rotation;
+			final boolean replace = action.replace;
+
+			if(replace){
+				content.append("Action=Replace," + piece.name() + "\n");
+			}else if(piece == null){
+				content.append("Action=Skip\n");
+			}else{
+				content.append("Action=Play," + piece.name() + ", x=" + position.getX() + ", y=" + position.getY() + ", rotation=" + rotation + "\n");
+			}
+		}else{
+			content.append("Action=none\n");
+		}
+	}
 /*
     @Override
     public void onNoAction(SkipEvent se) {

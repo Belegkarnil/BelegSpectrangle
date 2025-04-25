@@ -26,20 +26,23 @@ package be.belegkarnil.game.board.spectrangle.event;
  * @author Belegkarnil
  */
 public class RoundAdapter implements RoundListener{
-    /**
-     * See {@link RoundListener#onRoundBegins}
-     * @param event
-     */
-    @Override
-    public void onRoundBegins(RoundEvent event) {
+	/**
+	 * See {@link RoundListener#onRoundBegins}
+	 *
+	 * @param event
+	 */
+	@Override
+	public void onRoundBegins(RoundEvent event){
 
-    }
-    /**
-     * See {@link RoundListener#onRoundEnds}
-     * @param event
-     */
-    @Override
-    public void onRoundEnds(RoundEvent event) {
+	}
 
-    }
+	/**
+	 * See {@link RoundListener#onRoundEnds}
+	 *
+	 * @param event
+	 */
+	@Override
+	public void onRoundEnds(RoundEvent event){
+
+	}
 }

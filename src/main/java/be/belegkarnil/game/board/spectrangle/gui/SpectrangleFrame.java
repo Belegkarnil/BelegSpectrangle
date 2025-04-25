@@ -37,42 +37,75 @@ import java.awt.event.ActionListener;
  * @author Belegkarnil
  */
 public class SpectrangleFrame extends JFrame implements ActionListener{
-    public SpectrangleFrame() {
-        super("Spectrangle");
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+	public SpectrangleFrame(){
+		super("Spectrangle");
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        final JPanel contentPane = new JPanel(new BorderLayout());
+		final JPanel contentPane = new JPanel(new BorderLayout());
 
-        final Board board = new Board();
+		final Board board = new Board();
 
-        final BoardPanel boardPanel		    = new BoardPanel(board);
-        final LogPanel logPanel		        = new LogPanel();
-        final SettingsPanel settingsPanel	= new SettingsPanel(board);
-        final PiecesPanel piecesPanel		= new PiecesPanel();
-        final TimePanel timePanel		    = new TimePanel();
-        final ScorePanel scorePanel		    = new ScorePanel();
+		final BoardPanel boardPanel = new BoardPanel(board);
+		final LogPanel logPanel = new LogPanel();
+		final SettingsPanel settingsPanel = new SettingsPanel(board);
+		final PiecesPanel piecesPanel = new PiecesPanel();
+		final OpponentPiecesPanel opponent = new OpponentPiecesPanel();
+		final TimePanel timePanel = new TimePanel();
+		final ScorePanel scorePanel = new ScorePanel();
 
-        contentPane.add(boardPanel,BorderLayout.CENTER);
-        contentPane.add(settingsPanel,BorderLayout.NORTH);
-        contentPane.add(logPanel,BorderLayout.WEST);
-        contentPane.add(piecesPanel,BorderLayout.EAST);
+		contentPane.add(boardPanel, BorderLayout.CENTER);
+		contentPane.add(settingsPanel, BorderLayout.NORTH);
+		contentPane.add(logPanel, BorderLayout.WEST);
 
-        final JPanel south = new JPanel(new GridLayout(2,1));
-        south.add(scorePanel);
-        south.add(timePanel);
+		final JPanel east = new JPanel(new BorderLayout());
+		east.add(piecesPanel, BorderLayout.CENTER);
+		east.add(opponent, BorderLayout.SOUTH);
+		contentPane.add(east, BorderLayout.EAST);
 
-        contentPane.add(south,BorderLayout.SOUTH);
+		final JPanel south = new JPanel(new GridLayout(2, 1));
+		south.add(scorePanel);
+		south.add(timePanel);
+		contentPane.add(south, BorderLayout.SOUTH);
 
-        setContentPane(contentPane);
-        addMouseWheelListener(piecesPanel);
-    }
+		setContentPane(contentPane);
+		addMouseWheelListener(piecesPanel);
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        Player p1 = new Player("John",new SkipStrategy());
-        Player p2 = new Player("Jane",new SkipStrategy());
-        Board board = new Board();
-        Game game = new Game(board,p1,p2);
-        game.run();
-    }
+
+		/*
+TODO remove
+		final JPanel contentPane = new JPanel(new BorderLayout());
+
+		final Board board = new Board();
+
+		final BoardPanel boardPanel = new BoardPanel(board);
+		final LogPanel logPanel = new LogPanel();
+		final SettingsPanel settingsPanel = new SettingsPanel(board);
+		final PiecesPanel piecesPanel = new PiecesPanel();
+		final TimePanel timePanel = new TimePanel();
+		final ScorePanel scorePanel = new ScorePanel();
+
+		contentPane.add(boardPanel, BorderLayout.CENTER);
+		contentPane.add(settingsPanel, BorderLayout.NORTH);
+		contentPane.add(logPanel, BorderLayout.WEST);
+		contentPane.add(piecesPanel, BorderLayout.EAST);
+
+		final JPanel south = new JPanel(new GridLayout(2, 1));
+		south.add(scorePanel);
+		south.add(timePanel);
+
+		contentPane.add(south, BorderLayout.SOUTH);
+
+		setContentPane(contentPane);
+		addMouseWheelListener(piecesPanel);
+		 */
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e){
+		Player p1 = new Player("John", new SkipStrategy());
+		Player p2 = new Player("Jane", new SkipStrategy());
+		Board board = new Board();
+		Game game = new Game(board, p1, p2);
+		game.run();
+	}
 }

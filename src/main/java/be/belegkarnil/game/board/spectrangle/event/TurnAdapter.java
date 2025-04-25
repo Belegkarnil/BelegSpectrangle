@@ -26,21 +26,23 @@ package be.belegkarnil.game.board.spectrangle.event;
  * @author Belegkarnil
  */
 public class TurnAdapter implements TurnListener{
-    /**
-     * See {@link TurnListener#onTurnBegins}
-     * @param event
-     */
-    @Override
-    public void onTurnBegins(TurnEvent event) {
+	/**
+	 * See {@link TurnListener#onTurnBegins}
+	 *
+	 * @param event
+	 */
+	@Override
+	public void onTurnBegins(TurnEvent event){
 
-    }
+	}
 
-    /**
-     * See {@link TurnListener#onTurnEnds}
-     * @param event
-     */
-    @Override
-    public void onTurnEnds(TurnEvent event) {
+	/**
+	 * See {@link TurnListener#onTurnEnds}
+	 *
+	 * @param event
+	 */
+	@Override
+	public void onTurnEnds(TurnEvent event){
 
-    }
+	}
 }

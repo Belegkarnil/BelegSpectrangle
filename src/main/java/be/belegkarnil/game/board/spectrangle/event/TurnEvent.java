@@ -30,90 +30,96 @@ import java.util.EventObject;
  *
  * @author Belegkarnil
  */
-public class TurnEvent extends EventObject {
-    /**
-     * is the static constant that represents there are no action (null)
-     */
-    public static final Action NO_ACTION = null;
+public class TurnEvent extends EventObject{
+	/**
+	 * is the static constant that represents there are no action (null)
+	 */
+	public static final Action NO_ACTION = null;
 
-    /**
-     * is the first {link @Player} when the turn will start, the event is related to this player
-     */
-    public final Player current;
-    /**
-     * is the second/other/opponent {link @Player} when turn round will start
-     */
-    public final Player opponent;
-    /**
-     * is the identifier (counter) of the related round.
-     */
-    public final int round;
-    /**
-     * is the identifier (counter) of the related turn.
-     */
-    public final int turn;
-    /**
-     * is the chosen {#link Action}, what the current {@link Player}'s strategy plays
-     */
-    public final Action action;
-    /**
-     * is the {link @Game} related to this event (i.e. the {@link Game} that generates the event)
-     */
-    public final Game game;
+	/**
+	 * is the first {link @Player} when the turn will start, the event is related to this player
+	 */
+	public final Player current;
+	/**
+	 * is the second/other/opponent {link @Player} when turn round will start
+	 */
+	public final Player opponent;
+	/**
+	 * is the identifier (counter) of the related round.
+	 */
+	public final int round;
+	/**
+	 * is the identifier (counter) of the related turn.
+	 */
+	public final int turn;
+	/**
+	 * is the chosen {#link Action}, what the current {@link Player}'s strategy plays
+	 */
+	public final Action action;
+	/**
+	 * is the {link @Game} related to this event (i.e. the {@link Game} that generates the event)
+	 */
+	public final Game game;
 
-    /**
-     * Constructor that does not define a winner ({@link GameEvent#NO_WINNER}), designed for begin events.
-     *
-     * @param game the game related to the event, it's the source of the event
-     * @param current is the current player related to this event
-     * @param opponent is the second/other/opponent player
-     * @param round is the round identifier related to the event
-     * @param turn is the turn identifier related to the event
-     * @throws IllegalArgumentException if source is null
-     */
-    public TurnEvent(final Game game, final Player current, final Player opponent, final int round, final int turn){
-        this(game, current, opponent, round, turn, NO_ACTION);
-    }
-    /**
-     * Constructor requires an action ({@link TurnEvent#NO_ACTION}), designed for end events.
-     *
-     * @param game the game related to the event, it's the source of the event
-     * @param current is the current player related to this event
-     * @param opponent is the second/other/opponent player
-     * @param round is the round identifier related to the event
-     * @param turn is the turn identifier related to the event
-     * @param action is the action taken by the current player or {@link TurnEvent#NO_ACTION}
-     * @throws IllegalArgumentException if source is null
-     */
-    public TurnEvent(final Game game, final Player current, final Player opponent, final int round, final int turn, final Action action){
-        super(game);
-        this.current    = current;
-        this.opponent   = opponent;
-        this.round      = round;
-        this.turn       = turn;
-        this.action     = action;
-        this.game       = game;
-    }
+	/**
+	 * Constructor that does not define a winner ({@link GameEvent#NO_WINNER}), designed for begin events.
+	 *
+	 * @param game     the game related to the event, it's the source of the event
+	 * @param current  is the current player related to this event
+	 * @param opponent is the second/other/opponent player
+	 * @param round    is the round identifier related to the event
+	 * @param turn     is the turn identifier related to the event
+	 * @throws IllegalArgumentException if source is null
+	 */
+	public TurnEvent(final Game game, final Player current, final Player opponent, final int round, final int turn){
+		this(game, current, opponent, round, turn, NO_ACTION);
+	}
 
-    /**
-     * Know if the current action represents a skip action
-     * @return if the current event represents a skip action (excluding a replace/swap action)
-     */
-    public boolean isSkipAction(){
-        return action == NO_ACTION || (action.piece == null && !action.replace);
-    }
-    /**
-     * Know if the current action represents a replace/swap action
-     * @return if the current event represents a replace/swap action
-     */
-    public boolean isReplaceAction(){
-        return action != NO_ACTION && action.replace;
-    }
-    /**
-     * Know if the current action represents piece to play on the board (i.e. not a skip, nor a swap/replace action)
-     * @return if the current event represents an action with a piece (not null)
-     */
-    public boolean isPiecePlayed(){
-        return action != NO_ACTION && !action.replace && action.piece != null;
-    }
+	/**
+	 * Constructor requires an action ({@link TurnEvent#NO_ACTION}), designed for end events.
+	 *
+	 * @param game     the game related to the event, it's the source of the event
+	 * @param current  is the current player related to this event
+	 * @param opponent is the second/other/opponent player
+	 * @param round    is the round identifier related to the event
+	 * @param turn     is the turn identifier related to the event
+	 * @param action   is the action taken by the current player or {@link TurnEvent#NO_ACTION}
+	 * @throws IllegalArgumentException if source is null
+	 */
+	public TurnEvent(final Game game, final Player current, final Player opponent, final int round, final int turn, final Action action){
+		super(game);
+		this.current = current;
+		this.opponent = opponent;
+		this.round = round;
+		this.turn = turn;
+		this.action = action;
+		this.game = game;
+	}
+
+	/**
+	 * Know if the current action represents a skip action
+	 *
+	 * @return if the current event represents a skip action (excluding a replace/swap action)
+	 */
+	public boolean isSkipAction(){
+		return action == NO_ACTION || (action.piece == null && !action.replace);
+	}
+
+	/**
+	 * Know if the current action represents a replace/swap action
+	 *
+	 * @return if the current event represents a replace/swap action
+	 */
+	public boolean isReplaceAction(){
+		return action != NO_ACTION && action.replace;
+	}
+
+	/**
+	 * Know if the current action represents piece to play on the board (i.e. not a skip, nor a swap/replace action)
+	 *
+	 * @return if the current event represents an action with a piece (not null)
+	 */
+	public boolean isPiecePlayed(){
+		return action != NO_ACTION && !action.replace && action.piece != null;
+	}
 }

@@ -29,53 +29,55 @@ import java.util.EventObject;
  *
  * @author Belegkarnil
  */
-public class GameEvent  extends EventObject {
-    /**
-     * is a static constant with null value meaning that there are not yet a winner
-     */
-    public static Player NO_WINNER = null;
+public class GameEvent extends EventObject{
+	/**
+	 * is a static constant with null value meaning that there are not yet a winner
+	 */
+	public static Player NO_WINNER = null;
 
-    /**
-     * is the {link @Player} who win the {@link Game} or {@link GameEvent#NO_WINNER}
-     */
-    public final Player winner;
-    /**
-     * is the first {link @Player} when the game will start
-     */
-    public final Player firstPlayer;
-    /**
-     * is the second/other/opponent {link @Player} when the game will start
-     */
-    public final Player secondPlayer;
-    /**
-     * is the {link @Game} related to this event (i.e. the {@link Game} that generates the event)
-     */
-    public final Game game;
-    /**
-     * Constructor that does not define a winner ({@link GameEvent#NO_WINNER}), designed for begin events.
-     *
-     * @param game the game related to the event, it's the source of the event
-     * @param firstPlayer is the first player to play when the game will start
-     * @param secondPlayer is the second/other/opponent player to play when the game will start
-     * @throws IllegalArgumentException if source is null
-     */
-    public GameEvent(final Game game,final Player firstPlayer, final Player secondPlayer){
-        this(game,firstPlayer,secondPlayer,NO_WINNER);
-    }
-    /**
-     * Constructor requires a winner ({@link GameEvent#NO_WINNER}), designed for end events.
-     *
-     * @param game the game related to the event, it's the source of the event
-     * @param firstPlayer is the first player to play when the game will start
-     * @param secondPlayer is the second/other/opponent player to play when the game will start
-     * @param winner is the player (first/second) who win the {@link Game} or {@link GameEvent#NO_WINNER}
-     * @throws IllegalArgumentException if source is null
-     */
-    public GameEvent(final Game game,final Player firstPlayer, final Player secondPlayer, final Player winner){
-        super(game);
-        this.firstPlayer    = firstPlayer;
-        this.secondPlayer   = secondPlayer;
-        this.winner         = winner;
-        this.game           = game;
-    }
+	/**
+	 * is the {link @Player} who win the {@link Game} or {@link GameEvent#NO_WINNER}
+	 */
+	public final Player winner;
+	/**
+	 * is the first {link @Player} when the game will start
+	 */
+	public final Player firstPlayer;
+	/**
+	 * is the second/other/opponent {link @Player} when the game will start
+	 */
+	public final Player secondPlayer;
+	/**
+	 * is the {link @Game} related to this event (i.e. the {@link Game} that generates the event)
+	 */
+	public final Game game;
+
+	/**
+	 * Constructor that does not define a winner ({@link GameEvent#NO_WINNER}), designed for begin events.
+	 *
+	 * @param game         the game related to the event, it's the source of the event
+	 * @param firstPlayer  is the first player to play when the game will start
+	 * @param secondPlayer is the second/other/opponent player to play when the game will start
+	 * @throws IllegalArgumentException if source is null
+	 */
+	public GameEvent(final Game game, final Player firstPlayer, final Player secondPlayer){
+		this(game, firstPlayer, secondPlayer, NO_WINNER);
+	}
+
+	/**
+	 * Constructor requires a winner ({@link GameEvent#NO_WINNER}), designed for end events.
+	 *
+	 * @param game         the game related to the event, it's the source of the event
+	 * @param firstPlayer  is the first player to play when the game will start
+	 * @param secondPlayer is the second/other/opponent player to play when the game will start
+	 * @param winner       is the player (first/second) who win the {@link Game} or {@link GameEvent#NO_WINNER}
+	 * @throws IllegalArgumentException if source is null
+	 */
+	public GameEvent(final Game game, final Player firstPlayer, final Player secondPlayer, final Player winner){
+		super(game);
+		this.firstPlayer = firstPlayer;
+		this.secondPlayer = secondPlayer;
+		this.winner = winner;
+		this.game = game;
+	}
 }

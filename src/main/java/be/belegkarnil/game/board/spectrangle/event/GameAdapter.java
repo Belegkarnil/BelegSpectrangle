@@ -26,21 +26,23 @@ package be.belegkarnil.game.board.spectrangle.event;
  * @author Belegkarnil
  */
 public class GameAdapter implements GameListener{
-    /**
-     * See {@link GameListener#onGameBegins}
-     * @param event
-     */
-    @Override
-    public void onGameBegins(GameEvent event) {
+	/**
+	 * See {@link GameListener#onGameBegins}
+	 *
+	 * @param event
+	 */
+	@Override
+	public void onGameBegins(GameEvent event){
 
-    }
+	}
 
-    /**
-     * See {@link GameListener#onGameEnds}
-     * @param event
-     */
-    @Override
-    public void onGameEnds(GameEvent event) {
+	/**
+	 * See {@link GameListener#onGameEnds}
+	 *
+	 * @param event
+	 */
+	@Override
+	public void onGameEnds(GameEvent event){
 
-    }
+	}
 }
