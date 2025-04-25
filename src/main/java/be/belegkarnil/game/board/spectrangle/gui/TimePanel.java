@@ -78,7 +78,11 @@ public class TimePanel extends SpectranglePanel{
 
 	@Override
 	void register(Game game){
-		if(game == null) return;
+		if(game == null){
+			timer.cancel();
+			timer.purge();
+			return;
+		};
 
 		this.delay = game.getTimeout();
 

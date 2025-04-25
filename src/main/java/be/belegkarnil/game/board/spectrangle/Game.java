@@ -188,6 +188,9 @@ public class Game implements Runnable{
 			readAction = false;
 			current.skip();
 			fireTimeout(new MisdesignEvent(current, board));
+		}catch(InterruptedException ie){
+			Thread.currentThread().interrupt();
+			return;
 		}catch(Exception e){
 			readAction = false;
 			current.skip();
@@ -299,6 +302,7 @@ public class Game implements Runnable{
 		Player winner = null;
 		this.turn = 0;
 		do{
+			if(Thread.currentThread().isInterrupted()) return;
 			executeTurn();
 			if(players[0].countSkip() >= skipLimit
 					  || players[1].countSkip() >= skipLimit
@@ -333,7 +337,8 @@ public class Game implements Runnable{
 			player.getStrategy().register(this);
 		}
 		fireGameBegins(new GameEvent(this, this.players[0], this.players[1]));
-		while(players[0].countWin() < numWinningRounds && players[1].countWin() < numWinningRounds){
+
+		while(!Thread.currentThread().isInterrupted() && players[0].countWin() < numWinningRounds && players[1].countWin() < numWinningRounds){
 			executeRound();
 		}
 		fireGameEnds(new GameEvent(this, this.players[0], this.players[1], players[0].countWin() >= numWinningRounds ? players[0] : players[1]));

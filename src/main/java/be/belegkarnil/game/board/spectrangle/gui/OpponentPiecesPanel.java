@@ -38,11 +38,11 @@ import java.awt.Point;
 public class OpponentPiecesPanel extends SpectranglePanel implements TurnListener{
 	public final int SIZE = 60;
 	public final int SPACER = 20;
-	private TriangleCellDrawer[] drawer;
+	private final TriangleCellDrawer[] drawer;
 
 	public OpponentPiecesPanel(){
 		int rows = Game.INITIAL_PIECES >> 1;
-		if(rows << 1 < Game.INITIAL_PIECES) rows++;
+		if((rows << 1) < Game.INITIAL_PIECES) rows++;
 		setLayout(new GridLayout(rows, 2));
 		drawer = new TriangleCellDrawer[Game.INITIAL_PIECES];
 		for(int i = 0; i < drawer.length; i++){
@@ -78,8 +78,8 @@ public class OpponentPiecesPanel extends SpectranglePanel implements TurnListene
 	}
 
 	private void reset(){
-		for(int i = 0; i < drawer.length; i++)
-			drawer[i].reset();
+		for(TriangleCellDrawer drawer : drawer)
+			drawer.reset();
 	}
 
 	@Override

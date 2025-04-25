@@ -48,6 +48,8 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 
 /**
  * This class is a GUI component of the Game. It is the settings panel ({@link SpectranglePanel}).
@@ -65,7 +67,7 @@ public class SettingsPanel extends SpectranglePanel implements ActionListener{
 	private JButton play, stop;
 	private final Board board;
 	private ExecutorService executor;
-	private Thread thread;
+	private Future thread;
 	private Object threadLock = new Object();
 
 	public SettingsPanel(Board board){
@@ -81,7 +83,7 @@ public class SettingsPanel extends SpectranglePanel implements ActionListener{
 	private void checkFinished(){
 		boolean checkAgain = true;
 		synchronized(threadLock){
-			if(this.thread != null && !this.thread.isAlive()){
+			if(this.thread != null && this.thread.isDone()){
 				checkAgain = false;
 				freeze(false);
 				initGame(null);
@@ -242,8 +244,8 @@ public class SettingsPanel extends SpectranglePanel implements ActionListener{
 	private void stopGame(){
 		this.stop.setEnabled(false); // Avoid duplicate calls
 		synchronized(threadLock){
-			if(this.thread != null) this.thread.interrupt();
-			this.executor.shutdownNow();
+			if(this.thread != null)
+				this.thread.cancel(true);
 		}
 		checkFinished();
 	}
@@ -288,7 +290,7 @@ public class SettingsPanel extends SpectranglePanel implements ActionListener{
 			firstStrategy = (Strategy) constructor.newInstance();
 		}catch(Exception e){
 			e.printStackTrace();
-			System.out.println("TODO Joptionpane...");// TODO
+			JOptionPane.showMessageDialog(getParent(),"Cannot instanciante "+firstPlayerName.getSelectedItem()+" class", "Strategy error", JOptionPane.ERROR_MESSAGE);
 		}
 		try{
 			Class<Strategy> klass = (Class<Strategy>) (secondPlayerName.getSelectedItem());
@@ -296,7 +298,7 @@ public class SettingsPanel extends SpectranglePanel implements ActionListener{
 			secondStrategy = (Strategy) constructor.newInstance();
 		}catch(Exception e){
 			e.printStackTrace();
-			System.out.println("TODO Joptionpane...");// TODO
+			JOptionPane.showMessageDialog(getParent(),"Cannot instanciante "+secondPlayerName.getSelectedItem()+" class", "Strategy error", JOptionPane.ERROR_MESSAGE);
 		}
 		if(firstStrategy == null || secondStrategy == null) return;
 
@@ -311,8 +313,7 @@ public class SettingsPanel extends SpectranglePanel implements ActionListener{
 		SpectranglePanel.initGame(game);
 
 		synchronized(threadLock){
-			this.thread = new Thread(game);
-			this.executor.submit(this.thread);
+			this.thread = this.executor.submit(game);
 		}
 	}
 }
