@@ -59,7 +59,7 @@ public class MisdesignEvent extends EventObject{
 	 */
 	public final Piece piece;
 	/**
-	 * is the the position at which the player tried to play a piece (or {@link MisdesignEvent#NO_POSITION})
+	 * is the position at which the player tried to play a piece (or {@link MisdesignEvent#NO_POSITION})
 	 */
 	public final Point position;
 	/**

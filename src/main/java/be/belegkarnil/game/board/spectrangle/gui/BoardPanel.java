@@ -65,7 +65,7 @@ public class BoardPanel extends SpectranglePanel implements MouseListener, Mouse
 		this.board = board;
 		this.cells = new TriangleCellDrawer[11][];
 		this.lock = new Object();
-		this.color = Constants.FIST_PLAYER_COLOR;
+		this.color = Constants.FIRST_PLAYER_COLOR;
 
 		int i;
 		for(i = 0; i < 6; i++){
@@ -262,7 +262,7 @@ public class BoardPanel extends SpectranglePanel implements MouseListener, Mouse
 		game.addTurnListener(new TurnAdapter(){
 			@Override
 			public void onTurnBegins(TurnEvent te){
-				color = (te.turn % 2 == 0 ? Constants.FIST_PLAYER_COLOR : Constants.SECOND_PLAYER_COLOR);
+				color = (te.turn % 2 == 0 ? Constants.FIRST_PLAYER_COLOR : Constants.SECOND_PLAYER_COLOR);
 				current = null;
 				if(te.current.getStrategy() instanceof HMIStrategy){
 					synchronized(lock){

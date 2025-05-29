@@ -23,12 +23,15 @@ import be.belegkarnil.game.board.spectrangle.Bag;
 import be.belegkarnil.game.board.spectrangle.Constants;
 import be.belegkarnil.game.board.spectrangle.Game;
 import be.belegkarnil.game.board.spectrangle.Player;
+import be.belegkarnil.game.board.spectrangle.event.GameAdapter;
+import be.belegkarnil.game.board.spectrangle.event.GameEvent;
 import be.belegkarnil.game.board.spectrangle.event.RoundListener;
 import be.belegkarnil.game.board.spectrangle.event.RoundEvent;
 import be.belegkarnil.game.board.spectrangle.event.TurnAdapter;
 import be.belegkarnil.game.board.spectrangle.event.TurnEvent;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -59,7 +62,7 @@ public class ScorePanel extends SpectranglePanel{
 
 
 		FIRST_PLAYER.setOpaque(true);
-		FIRST_PLAYER.setBackground(Constants.FIST_PLAYER_COLOR);
+		FIRST_PLAYER.setBackground(Constants.FIRST_PLAYER_COLOR);
 		SECOND_PLAYER.setOpaque(true);
 		SECOND_PLAYER.setBackground(Constants.SECOND_PLAYER_COLOR);
 
@@ -109,6 +112,14 @@ public class ScorePanel extends SpectranglePanel{
 	void register(Game game){
 		if(game == null) return;
 
+		game.addGameListener(new GameAdapter() {
+			@Override
+			public void onGameEnds(GameEvent ge){
+				if(ge.winner != null){
+					JOptionPane.showMessageDialog(getParent(), "The winner is " + ge.winner.getName(), "Game ended", JOptionPane.INFORMATION_MESSAGE);
+				}
+			}
+		});
 		game.addTurnListener(new TurnAdapter(){
 			@Override
 			public void onTurnBegins(TurnEvent te){

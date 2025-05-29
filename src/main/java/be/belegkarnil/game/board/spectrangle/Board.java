@@ -95,7 +95,7 @@ public class Board implements Cloneable{
 	 */
 	protected Board(Board board) throws CloneNotSupportedException{
 		this((Bag) board.bag.clone(), board.SIZE);
-		board.firstMove = firstMove;
+		this.firstMove = board.firstMove;
 		for(int row = 0; row < board.countRows(); row++){
 			for(int column = 0; column < board.countColumns(row); column++){
 				this.factors[row][column] = board.factors[row][column];

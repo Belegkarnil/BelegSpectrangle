@@ -34,6 +34,6 @@ public final class Constants{
 	public static final Color YELLOW_COLOR = new Color(210, 182, 39);
 	public static final Color WHITE_COLOR = new Color(173, 161, 147);
 
-	public static final Color FIST_PLAYER_COLOR = PURPLE_COLOR.brighter();
+	public static final Color FIRST_PLAYER_COLOR = PURPLE_COLOR.brighter();
 	public static final Color SECOND_PLAYER_COLOR = YELLOW_COLOR.brighter();
 };
